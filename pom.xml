@@ -97,10 +97,15 @@
 	</build>
 
 	<reporting>
+		<build>
+    <pluginManagement>
+	
 		<plugins>
 			<plugin>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 			</plugin>
 		</plugins>
+		  </pluginManagement>
+  		</build>
 	</reporting>
 </project>

@@ -1,5 +1,5 @@
 # Projet-4A
-https://travis-ci.org/{{jimmmyy}}/{{Projet-4A}}.png?branch={{master}}
+[![Build Status](https://travis-ci.com/Jimmmyy/Projet-4A.svg?branch=master)](https://travis-ci.com/Jimmmyy/Projet-4A)
 
 Hugo Blasco/Charles Cohen/Jimmy Nguyen/Emmanuelle Tourneroche
 

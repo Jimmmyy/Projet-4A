@@ -41,7 +41,20 @@
     </dependencies>
 
   <build>
+
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>cobertura-maven-plugin</artifactId>
+    <version>2.7</version>
+    <configuration>
+        <formats>
+            <format>html</format>
+            <format>xml</format>
+        </formats>
+        <check />
+    </configuration>
+</plugin>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>

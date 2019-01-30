@@ -1,5 +1,10 @@
 package esiea.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class SupermarketTest {
@@ -21,5 +26,9 @@ public class SupermarketTest {
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
         // Todo: complete this test
+
+        List<Product> products = Arrays.asList(new Product("toto", ProductUnit.Each));
+        assertThat(true).isTrue();
+        assertThat(products).extracting(Product::getName).as("Product names").containsExactly("apple", "orange");
     }
 }

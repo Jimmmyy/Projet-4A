@@ -29,10 +29,6 @@ public class SupermarketTest {
         // réduction est en court sur les brosses à dents.
         
         assertThat(receipt.getTotalPrice()).isEqualTo(2.5*1.99);
-        
-        //List<Product> products = Arrays.asList(new Product("toto", ProductUnit.Each));
-        //assertThat(true).isTrue();
-        //assertThat(products).extracting(Product::getName).as("Product names").containsExactly("apple", "orange");
     }
     
     @Test
@@ -101,5 +97,12 @@ public class SupermarketTest {
         Receipt receipt = teller.checksOutArticlesFrom(cart);
         
         assertThat(receipt.getTotalPrice()).isEqualTo(4.80);
+    }
+
+    
+    @Test
+    public void testListePanier() {
+    	List<Product> products = Arrays.asList(new Product("zoulou", ProductUnit.Each), new Product("tango", ProductUnit.Each));
+        assertThat(products).extracting(Product::getName).as("Product names").containsExactly("zoulou", "tango"); 	
     }
 }

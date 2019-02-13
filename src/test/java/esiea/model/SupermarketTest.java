@@ -38,7 +38,7 @@ public class SupermarketTest {
     }
     
     @Test
-    public void testOffreTroisPourDeux() {
+    public void testOffreThreeForTwo() {
     	SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -51,5 +51,21 @@ public class SupermarketTest {
         Receipt receipt = teller.checksOutArticlesFrom(cart);
         
         assertThat(receipt.getTotalPrice()).isEqualTo(0.99*2);
+    }
+    
+    @Test
+    public void testOffreTwoForAmount() {
+    	SupermarketCatalog catalog = new FakeCatalog();
+        Product apple = new Product("apple", ProductUnit.Kilo);
+        catalog.addProduct(apple, 1.10);
+        
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(apple, 2);
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, apple, 1.90);
+        
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        
+        assertThat(receipt.getTotalPrice()).isEqualTo(1.90);
     }
 }

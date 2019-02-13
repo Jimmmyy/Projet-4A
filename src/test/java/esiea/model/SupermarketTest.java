@@ -29,13 +29,31 @@ public class SupermarketTest {
         // réduction est en court sur les brosses à dents.
         
         assertThat(receipt.getTotalPrice()).isEqualTo(2.5*1.99);
-        // WOW CA MARCHE
-        
         
         //List<Product> products = Arrays.asList(new Product("toto", ProductUnit.Each));
         //assertThat(true).isTrue();
         //assertThat(products).extracting(Product::getName).as("Product names").containsExactly("apple", "orange");
     }
+    
+    @Test
+    public void testPrixPommeAvecReducPomme() {
+        SupermarketCatalog catalog = new FakeCatalog();
+        Product apples = new Product("apples", ProductUnit.Kilo);
+        catalog.addProduct(apples, 1.99);
+
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(apples, 3);
+
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, apples, 10.0);
+
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        
+        double expected = 3*1.99-3*1.99*0.1;
+        
+        assertThat(receipt.getTotalPrice()).isEqualTo(expected);
+        
+     }
     
     @Test
     public void testOffreThreeForTwo() {

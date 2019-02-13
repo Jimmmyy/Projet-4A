@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 public class SupermarketTest {
 
     @Test
-    public void testSomething() {
+    public void testPrixPommeAvecReducBrosseADents() {
         SupermarketCatalog catalog = new FakeCatalog();
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);
         catalog.addProduct(toothbrush, 0.99);
@@ -25,8 +25,6 @@ public class SupermarketTest {
 
         Receipt receipt = teller.checksOutArticlesFrom(cart);
 
-        // TODO: complete this test
-        
         //test : combien coute 2.5 kg de pommes à 1.99€ compte tenu du fait qu'une
         // réduction est en court sur les brosses à dents.
         
@@ -37,5 +35,21 @@ public class SupermarketTest {
         //List<Product> products = Arrays.asList(new Product("toto", ProductUnit.Each));
         //assertThat(true).isTrue();
         //assertThat(products).extracting(Product::getName).as("Product names").containsExactly("apple", "orange");
+    }
+    
+    @Test
+    public void testOffreTroisPourDeux() {
+    	SupermarketCatalog catalog = new FakeCatalog();
+        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+        catalog.addProduct(toothbrush, 0.99);
+        
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(toothbrush, 3);
+        Teller teller = new Teller(catalog);
+        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 1);
+        
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        
+        assertThat(receipt.getTotalPrice()).isEqualTo(0.99*2);
     }
 }

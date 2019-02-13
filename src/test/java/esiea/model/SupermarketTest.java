@@ -98,7 +98,20 @@ public class SupermarketTest {
         
         assertThat(receipt.getTotalPrice()).isEqualTo(4.80);
     }
-
+    
+    @Test
+    public void testPrixSansOffre() {
+    	SupermarketCatalog catalog = new FakeCatalog();
+        Product porsche = new Product("porsche", ProductUnit.Each);
+        catalog.addProduct(porsche, 100000);
+        
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(porsche, 1);
+        Teller teller = new Teller(catalog);
+        
+        Receipt receipt = teller.checksOutArticlesFrom(cart);
+        assertThat(receipt.getTotalPrice()).isEqualTo(100000);
+    }
     
     @Test
     public void testListePanier() {

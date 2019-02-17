@@ -2,10 +2,16 @@ package esiea.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+
+
 
 public class SupermarketTest {
 
@@ -122,6 +128,7 @@ public class SupermarketTest {
     @Test
     public void testProduct() {
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
-    	assertThat(pomme.equals(pomme),true);
+    	boolean condition=pomme.equals(pomme);
+    	assertTrue(condition);
     }
 }

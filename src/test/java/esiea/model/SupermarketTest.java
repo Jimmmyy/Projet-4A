@@ -146,6 +146,13 @@ public class SupermarketTest {
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
     	boolean condition=pomme.equals(null);
     	assertFalse(condition);
-    	
+    }
+    
+    @Test
+    
+    public void testGetUnitProduct(){
+    	Product pomme= new Product("pomme",ProductUnit.Kilo);
+    	ProductUnit Unite=pomme.getUnit();
+    	assertEquals(Unite,ProductUnit.Kilo);
     }
 }

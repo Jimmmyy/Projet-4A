@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
 
 
 
@@ -154,5 +155,15 @@ public class SupermarketTest {
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
     	ProductUnit Unite=pomme.getUnit();
     	assertEquals(Unite,ProductUnit.Kilo);
+    }
+    
+    @Test
+    
+    public void testGettersReceipt(){
+    	Receipt ticket= new Receipt();
+    	List<ReceiptItem> items= new ArrayList<>();
+    	List<ReceiptItem> itemsdelobjet=ticket.getItems();
+    	
+    	assertEquals(items,itemsdelobjet);
     }
 }

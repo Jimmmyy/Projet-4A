@@ -162,9 +162,6 @@ public class SupermarketTest {
     	List<ReceiptItem> items= new ArrayList<>();
     	List<ReceiptItem> itemsdelobjet=ticket.getItems();
     	
-    	List<Discount> discounts = new ArrayList<>();
-    	List<Discount> discountsdelobjet = ticket.getDiscounts();
-    	
     	assertEquals(items,itemsdelobjet);
     }
     

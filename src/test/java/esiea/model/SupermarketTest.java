@@ -173,4 +173,14 @@ public class SupermarketTest {
     	assertEquals(discounts,discountsdelobjet);
     }
     
+    @Test
+    public void testGetterPrice(){
+    	
+    	Product product=new Product("pomme",ProductUnit.Kilo);
+    	ReceiptItem ticket= new ReceiptItem(product,2.0,10.0,20.0);
+    	double prix=ticket.getPrice();
+    	double prix2=10.0;
+    	assertEquals(prix,prix2);
+    }
+    
 }

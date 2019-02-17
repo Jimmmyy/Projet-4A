@@ -129,8 +129,13 @@ public class SupermarketTest {
     @Test
     public void testProduct() {
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
-    	boolean condition=pomme.equals(pomme);
-    	assertTrue(condition);
+    	boolean truecondition=pomme.equals(pomme);
+    	assertTrue(truecondition);
+    	
+    	boolean falsecondition=pomme.equals(null);
+    	assertFalse(falsecondition);
+    	
+    	
     }
     
    @Test
@@ -139,13 +144,13 @@ public class SupermarketTest {
     	Object obj = new Object();
     	assertNotEquals(pomme,obj);
     }
- /*  
+   
     @Test
     public void testNullProduct(){
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
     	boolean condition=pomme.equals(null);
     	assertFalse(condition);
-    }*/
+    }
     
     @Test
     public void testGetUnitProduct(){

@@ -131,4 +131,13 @@ public class SupermarketTest {
     	boolean condition=pomme.equals(pomme);
     	assertTrue(condition);
     }
+    
+    @Test
+    public void testWrongProduct(){
+    	Product pomme= new Product("pomme",ProductUnit.Kilo);
+    	ProductQuantity productquantite= new ProductQuantity(pomme,2.0);
+    	boolean condition=pomme.equals(productquantite);
+    	assertFalse(condition);
+    	
+    }
 }

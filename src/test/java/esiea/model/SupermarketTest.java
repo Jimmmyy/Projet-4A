@@ -136,10 +136,8 @@ public class SupermarketTest {
    @Test
     public void testWrongProduct(){
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
-    	ProductQuantity productquantite= new ProductQuantity(pomme,2.0);
-    	boolean condition=pomme.equals(productquantite);
-    	assertFalse(condition);
-    	
+    	Object obj = new Object();
+    	assertNotEquals(pomme,obj);
     }
  /*  
     @Test

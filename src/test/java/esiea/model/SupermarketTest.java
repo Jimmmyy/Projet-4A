@@ -141,13 +141,13 @@ public class SupermarketTest {
     	assertFalse(condition);
     	
     }*/
-    
+ /*  
     @Test
     public void testNullProduct(){
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
     	boolean condition=pomme.equals(null);
     	assertFalse(condition);
-    }
+    }*/
     
     @Test
     public void testGetUnitProduct(){

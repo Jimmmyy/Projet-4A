@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
@@ -208,5 +209,23 @@ public class SupermarketTest {
     	
     }
     
+    @Test
+   
+    public void testNoDiscount () {
+
+       SupermarketCatalog catalog = new FakeCatalog();
+       Product cherry = new Product("cherry", ProductUnit.Kilo);
+       catalog.addProduct(cherry, 1.99);
+
+       ShoppingCart cart = new ShoppingCart();
+       cart.addItemQuantity(cherry, 2);
+
+       Teller teller = new Teller(catalog);
+     
+       Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+       Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(3.98);
+
+    }
  
 }

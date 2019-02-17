@@ -183,4 +183,16 @@ public class SupermarketTest {
     	assertEquals(prix,prix2);
     }
     
+    @Test
+    
+    public void testGetterProduct(){
+    	Product product=new Product("pomme",ProductUnit.Kilo);
+    	ReceiptItem ticket= new ReceiptItem(product,2.0,10.0,20.0);
+    	Product verifProduct = ticket.getProduct();
+    	assertEquals(product,verifProduct);
+    }
+    
+    
+    
+ 
 }

@@ -150,7 +150,6 @@ public class SupermarketTest {
     }
     
     @Test
-    
     public void testGetUnitProduct(){
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
     	ProductUnit Unite=pomme.getUnit();
@@ -158,12 +157,25 @@ public class SupermarketTest {
     }
     
     @Test
-    
-    public void testGettersReceipt(){
+    public void testGetterItemsReceipt(){
     	Receipt ticket= new Receipt();
     	List<ReceiptItem> items= new ArrayList<>();
     	List<ReceiptItem> itemsdelobjet=ticket.getItems();
     	
+    	List<Discount> discounts = new ArrayList<>();
+    	List<Discount> discountsdelobjet = ticket.getDiscounts();
+    	
     	assertEquals(items,itemsdelobjet);
     }
+    
+    @Test
+    public void testGetterDiscountsReceipt(){
+    	
+    	Receipt ticket= new Receipt();
+    	List<Discount> discounts = new ArrayList<>();
+    	List<Discount> discountsdelobjet = ticket.getDiscounts();
+    	
+    	assertEquals(discounts,discountsdelobjet);
+    }
+    
 }

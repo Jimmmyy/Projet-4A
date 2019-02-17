@@ -227,5 +227,13 @@ public class SupermarketTest {
        Assertions.assertThat(receipt.getTotalPrice()).isEqualTo(3.98);
 
     }
+    
+    @Test
+    public void getDescriptiontest(){
+        Product apples = new Product("apples", ProductUnit.Kilo);
+        Discount testDiscount = new Discount(apples, "Apples Discount", 1.99);
+
+        Assertions.assertThat(testDiscount.getDescription()).isEqualTo("Apples Discount");
+    }
  
 }

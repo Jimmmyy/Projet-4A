@@ -118,4 +118,10 @@ public class SupermarketTest {
     	List<Product> products = Arrays.asList(new Product("zoulou", ProductUnit.Each), new Product("tango", ProductUnit.Each));
         assertThat(products).extracting(Product::getName).as("Product names").containsExactly("zoulou", "tango"); 	
     }
+    
+    @Test
+    public void testProduct() {
+    	Product pomme= new Product("pomme",ProductUnit.Kilo);
+    	assertThat(pomme.equals(pomme),true);
+    }
 }

@@ -193,6 +193,15 @@ public class SupermarketTest {
     }
     
     
+    @Test
+    
+    public void testGetterQuantity(){
+    	Product product=new Product("pomme",ProductUnit.Kilo);
+    	ReceiptItem ticket1= new ReceiptItem(product,2.0,10.0,20.0);
+    	double verifquantityproduct = ticket1.getQuantity();
+    	assertEquals(2.0, verifquantityproduct);
+    	
+    }
     
  
 }

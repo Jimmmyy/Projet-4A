@@ -114,8 +114,12 @@ public class SupermarketTest {
     }
     
     @Test
-    public void testListePanier() {
+    public void testListePanierPleine() {
     	List<Product> products = Arrays.asList(new Product("zoulou", ProductUnit.Each), new Product("tango", ProductUnit.Each));
         assertThat(products).extracting(Product::getName).as("Product names").containsExactly("zoulou", "tango"); 	
     }
+    
+    //faire test sur liste des discounts
+    //faire test sur product quantity
+    //faire tets sur receipt item
 }

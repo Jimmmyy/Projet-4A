@@ -296,5 +296,12 @@ public class SupermarketTest {
            ReceiptItem receiptItem = new ReceiptItem(product, 2.0, 1.99, 3.98);
            Assertions.assertThat(receiptItem.hashCode()).isEqualTo(Objects.hash(product, 1.99, 3.98, 2.0));
        }
+
+       @Test
+    public void testGetProduct(){
+        Product flowers = new Product("flowers", ProductUnit.Kilo);
+        ProductQuantity flowers = new ProductQuantity(flowers, 20.500);
+        Assertions.assertThat(flowers.getProduct()).isEqualTo(flowers);
+    }
  
 }

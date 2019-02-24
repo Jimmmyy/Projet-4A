@@ -63,16 +63,16 @@ public class ShoppingCartTest {
 	    public void testOffreThreeForTwo() {
 	    	SupermarketCatalog catalog = new FakeCatalog();
 	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
-	        catalog.addProduct(toothbrush, 0.99);
+	        catalog.addProduct(toothbrush, 1);
 	        
 	        ShoppingCart cart = new ShoppingCart();
-	        cart.addItemQuantity(toothbrush, 3);
+	        cart.addItemQuantity(toothbrush, 6);
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 2);
+	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(0.99*2);
+	        assertThat(receipt.getTotalPrice()).isEqualTo(1*4);
 	    }
 	    
 	    @Test

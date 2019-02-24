@@ -138,17 +138,25 @@ public class ShoppingCartTest {
 	    @Test
 	    public void testOffreFiveForAmount() {
 	    	SupermarketCatalog catalog = new FakeCatalog();
-	        Product kiwi = new Product("kiwi", ProductUnit.Kilo);
-	        catalog.addProduct(kiwi, 1.50);
+	        Product kiwi = new Product("kiwi", ProductUnit.Each);
+	        catalog.addProduct(kiwi, 2.00);
+	        
+	     
+	        Teller teller = new Teller(catalog);
+	        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, kiwi, 7.50);
 	        
 	        ShoppingCart cart = new ShoppingCart();
-	        cart.addItemQuantity(kiwi, 5);
-	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, kiwi, 4.80);
+	        cart.addItemQuantity(kiwi, 3);
 	        
-	        Receipt receipt = teller.checksOutArticlesFrom(cart);
+	        double SuposedCartPrice =  2*3;
+	        double RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
 	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(4.80);
+	        assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("3 articles prix de base");
+	        cart.addItemQuantity(kiwi, 2);
+	        SuposedCartPrice =  2*5 - ((2*5)*0.25) ;
+	        RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
+	        
+	        assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("5 article a - 25%"); 
 	    }
 	    
 	    @Test

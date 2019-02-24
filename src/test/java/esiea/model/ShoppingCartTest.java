@@ -6,7 +6,15 @@ import org.junit.jupiter.api.Test;
 
 
 
+import java.util.Map;
+
+import org.junit.jupiter.api.Assertions;
+
+
 public class ShoppingCartTest {
+	
+	private ShoppingCart cart = new ShoppingCart();
+	private Product toothbrush = new Product("toothbrush", ProductUnit.Each);
 
 	 @Test
 	    public void testPrixPommeAvecReducBrosseADents() {
@@ -111,4 +119,14 @@ public class ShoppingCartTest {
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        assertThat(receipt.getTotalPrice()).isEqualTo(100000);
 	    }
+	    
+	    @Test
+		public void testProductQuantitiesNotEmptyIfAddItem() {
+			cart.addItem(toothbrush);
+			Map<Product, Double> productQuantities = cart.productQuantities();
+			
+			Assertions.assertNotNull(productQuantities);
+		}
+	    
+	    
 }

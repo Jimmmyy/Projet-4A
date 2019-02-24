@@ -67,12 +67,15 @@ public class ShoppingCartTest {
 	        
 	        ShoppingCart cart = new ShoppingCart();
 	        cart.addItemQuantity(toothbrush, 6);
+	        Map<Product, Offer> offers = new HashMap<>();
+	        Offer offer = new Offer(SpecialOfferType.ThreeForTwo, toothbrush, 6.0);
+	        offers.put(toothbrush, offer);
 	        Teller teller = new Teller(catalog);
 	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(1*4);
+	        assertThat(receipt.getTotalPrice()).isEqualTo(4);
 	    }
 	    
 	    @Test

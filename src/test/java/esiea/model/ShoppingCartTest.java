@@ -119,24 +119,33 @@ public class ShoppingCartTest {
 	   }
 	   
 	    
-	    @Test
-	    public void testOffreTwoForAmount() {
-	    	SupermarketCatalog catalog = new FakeCatalog();
-	        Product apple = new Product("apple", ProductUnit.Kilo);
-	        catalog.addProduct(apple, 1.10);
-	        
-	        ShoppingCart cart = new ShoppingCart();
-	        cart.addItemQuantity(apple, 2);
-	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, apple, 1.90);
-	        
-	        double SuposedCartPrice = (1.1);
-	        double RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
-	        Receipt receipt = teller.checksOutArticlesFrom(cart);
-	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(1.90);
-	    }
-	    
+	   @Test
+       public void testtwoForAmount()
+       {
+        
+        SupermarketCatalog catalog = new FakeCatalog();
+        Teller teller = new Teller(catalog);
+        
+        Product rasoir = new Product("rasoir", ProductUnit.Each);
+        catalog.addProduct(rasoir, 2.5);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, rasoir, 4);
+
+        
+        ShoppingCart cart = new ShoppingCart();
+        cart.addItemQuantity(rasoir, 1);
+        double SuposedCartPrice = (2.5);
+        double RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
+        assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("Pas de reduc sur l'article"); 
+
+        
+        cart.addItemQuantity(rasoir, 1);
+        SuposedCartPrice = (4);
+        RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
+        assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("2 articles avec reduc"); 
+
+
+    }
+
 	    @Test
 	    public void testOffreFiveForAmount() {
 	    	SupermarketCatalog catalog = new FakeCatalog();

@@ -68,7 +68,7 @@ public class ShoppingCartTest {
 	        ShoppingCart cart = new ShoppingCart();
 	        cart.addItemQuantity(toothbrush, 3);
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 1);
+	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 2);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        

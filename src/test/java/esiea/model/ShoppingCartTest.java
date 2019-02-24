@@ -64,11 +64,15 @@ public class ShoppingCartTest {
 	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
 	        catalog.addProduct(toothbrush, 1.0);
 	        
+	        Product poire = new Product("poire", ProductUnit.Each);
+	        catalog.addProduct(poire, 1.0);
+	        cart.addItemQuantity(poire, 6);
+	        
 	        Map<Product, Offer> listeDesPromos=new HashMap<>();
 	        
 	        //Ajout de la promotion dans le catalogue de promotions
-	        Offer offrethreefortwo=new Offer(SpecialOfferType.ThreeForTwo,toothbrush,2.0);
-	        listeDesPromos.put(toothbrush,offrethreefortwo);
+	        Offer offrethreefortwo=new Offer(SpecialOfferType.ThreeForTwo,poire,4);
+	        listeDesPromos.put(poire,offrethreefortwo);
 	                
 	        
 	        ShoppingCart cart = new ShoppingCart();
@@ -79,10 +83,10 @@ public class ShoppingCartTest {
 	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4.0);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
-	        Receipt receipt2=new Receipt();
+	     
 	        cart.handleOffers(receipt,listeDesPromos,catalog);
 	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(2.0);
+	        assertThat(receipt.getTotalPrice()).isEqualTo(4.0);
 	    }
 	    
 	    @Test

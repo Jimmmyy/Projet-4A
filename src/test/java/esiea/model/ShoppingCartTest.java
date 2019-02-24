@@ -15,6 +15,7 @@ public class ShoppingCartTest {
 	
 	private ShoppingCart cart = new ShoppingCart();
 	private Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+	private Product poire = new Product ("poire", ProductUnit.Kilo);
 
 	 @Test
 	    public void testPrixPommeAvecReducBrosseADents() {
@@ -128,5 +129,14 @@ public class ShoppingCartTest {
 			Assertions.assertNotNull(productQuantities);
 		}
 	    
-	    
+	    @Test
+	    public void testAjoutProduitDejaExistantDansLaListe() {
+	    	
+	    	cart.addItem(poire);
+	    	cart.addItemQuantity(poire, 3);
+	    	Map<Product, Double> productQuantities = cart.productQuantities();
+	    	double quantite=productQuantities.get(poire);
+	    	Assertions.assertEquals(4,quantite);
+
+	    }
 }

@@ -85,8 +85,10 @@ public class ShoppingCartTest {
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	     
 	        cart.handleOffers(receipt,listeDesPromos,catalog);
+	        for(Discount x : receipt.getDiscounts()){
 	        
 	        assertThat(receipt.getTotalPrice()).isEqualTo(4.0);
+	        }
 	    }
 	    
 	    @Test

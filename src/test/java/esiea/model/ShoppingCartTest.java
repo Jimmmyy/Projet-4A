@@ -79,6 +79,7 @@ public class ShoppingCartTest {
 	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4.0);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
+	        Receipt receipt2=new Receipt();
 	        cart.handleOffers(receipt,listeDesPromos,catalog);
 	        
 	        assertThat(receipt.getTotalPrice()).isEqualTo(2.0);

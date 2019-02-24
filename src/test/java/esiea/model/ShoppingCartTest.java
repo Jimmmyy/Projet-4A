@@ -59,7 +59,7 @@ public class ShoppingCartTest {
 	        
 	     }
 	    
-	   /* @Test
+	  /* @Test
 	    public void testOffreThreeForTwo() {
 	    	SupermarketCatalog catalog = new FakeCatalog();
 	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
@@ -90,26 +90,33 @@ public class ShoppingCartTest {
 	        
 	        assertThat(receipt.getTotalPrice()).isEqualTo(4.0);
 	        
-	    }
-	    */
-	    // test 
-	    @Test
-	    public void handleOffersThreeForTwoTest()
-	    {
-	            ShoppingCart shoppingCart = new ShoppingCart();
-	            Product apples = new Product("apples", ProductUnit.Kilo);
-	            shoppingCart.addItemQuantity(apples, 6.0);
-	            Map<Product, Offer> offers = new HashMap<>();
-	            Offer offer = new Offer(SpecialOfferType.ThreeForTwo, apples, 6.0);
-	            offers.put(apples, offer);
-	            Receipt receipt = new Receipt();
-	            SupermarketCatalog catalog = new FakeCatalog();
-	            catalog.addProduct(apples, 5.0);
-	            shoppingCart.handleOffers(receipt, offers, catalog);
-	            
-	            
-	  	            
-	    }
+	    }*/
+	   
+	   @Test
+	   
+	   public void test3pour2offre() {
+		   
+		   SupermarketCatalog catalog = new FakeCatalog();
+           Teller teller = new Teller(catalog);
+           Product tampax = new Product("tampax", ProductUnit.Each);
+		   
+           catalog.addProduct(tampax, 3.49);
+           teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, tampax, 0);
+           
+ 
+           ShoppingCart cart = new ShoppingCart();
+           cart.addItemQuantity(tampax, 2);   
+           
+           double SuposedCartPrice = 2 * 3.49;
+           double RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
+           
+           assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("2 boite de tampax pour le prix de 2"); 
+           
+           cart.addItem(tampax); 
+           SuposedCartPrice = 2 * 3.49;
+           RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
+           assertThat(RealCartPrice).isEqualTo(SuposedCartPrice).as("2 boite de tampax pour le prix de 3"); 
+	   }
 	   
 	    
 	    @Test

@@ -123,11 +123,11 @@ public class SupermarketTest {
     }
     
     @Test
-    public void testListePanier() {
+    public void testListePanierPleine() {
     	List<Product> products = Arrays.asList(new Product("zoulou", ProductUnit.Each), new Product("tango", ProductUnit.Each));
         assertThat(products).extracting(Product::getName).as("Product names").containsExactly("zoulou", "tango"); 	
     }
-    
+
     @Test
     public void testProduct() {
     	Product pomme= new Product("pomme",ProductUnit.Kilo);
@@ -227,11 +227,12 @@ public class SupermarketTest {
        }
 
        @Test
-       public void hashCodeTest(){
+       public void hashCodeTest() {
            Product product = new Product("product",ProductUnit.Kilo);
            ReceiptItem receiptItem = new ReceiptItem(product, 2.0, 1.99, 3.98);
            Assertions.assertThat(receiptItem.hashCode()).isEqualTo(Objects.hash(product, 1.99, 3.98, 2.0));
        }
-    
-    
+
+      
+ 
 }

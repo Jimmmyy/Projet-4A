@@ -130,6 +130,8 @@ public class ShoppingCartTest {
 	        Teller teller = new Teller(catalog);
 	        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, apple, 1.90);
 	        
+	        double SuposedCartPrice = (1.1);
+	        double RealCartPrice = teller.checksOutArticlesFrom(cart).getTotalPrice();
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        
 	        assertThat(receipt.getTotalPrice()).isEqualTo(1.90);

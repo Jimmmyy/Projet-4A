@@ -9,8 +9,7 @@ import esiea.ReceiptPrinter;
 public class ReceiptPrinterTest {
 	
 	
-		 
-		 
+		
 		 @Test
 		    public void testPrintReceipt(){
 		        SupermarketCatalog catalog = new FakeCatalog();

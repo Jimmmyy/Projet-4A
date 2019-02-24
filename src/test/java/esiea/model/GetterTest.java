@@ -39,6 +39,14 @@ public class GetterTest {
 	    	assertEquals(prix,prix2);
 	    }
 	    
+	    
+	    @Test
+	    public void testGetUnitProduct(){
+	    	Product pomme= new Product("pomme",ProductUnit.Kilo);
+	    	ProductUnit Unite=pomme.getUnit();
+	    	assertEquals(Unite,ProductUnit.Kilo);
+	    }
+	    
 	    @Test
 	    
 	    public void testGetterProduct(){

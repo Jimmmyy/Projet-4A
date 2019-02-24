@@ -77,6 +77,7 @@ public class GetterTest {
 	        Assertions.assertThat(testDiscount.getProduct()).isEqualTo(apples);
 	    }
 	    
+	    
 	
 	
 

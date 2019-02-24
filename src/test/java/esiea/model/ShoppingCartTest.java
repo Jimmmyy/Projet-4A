@@ -62,19 +62,26 @@ public class ShoppingCartTest {
 	    public void testOffreThreeForTwo() {
 	    	SupermarketCatalog catalog = new FakeCatalog();
 	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
-	        catalog.addProduct(toothbrush, 1);
+	        catalog.addProduct(toothbrush, 1.0);
+	        
+	        Map<Product, Offer> listeDesPromos=new HashMap<>();
+	        
+	        //Ajout de la promotion dans le catalogue de promotions
+	        Offer offrethreefortwo=new Offer(SpecialOfferType.ThreeForTwo,toothbrush,2.0);
+	        listeDesPromos.put(toothbrush,offrethreefortwo);
+	                
 	        
 	        ShoppingCart cart = new ShoppingCart();
-	        cart.addItemQuantity(toothbrush, 6);
-	        Map<Product, Offer> offers = new HashMap<>();
-	        Offer offer = new Offer(SpecialOfferType.ThreeForTwo, toothbrush, 6.0);
-	        offers.put(toothbrush, offer);
+	        cart.addItemQuantity(toothbrush, 6.0);
+	        
+	     
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4);
+	        teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, toothbrush, 4.0);
 	        
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
+	        cart.handleOffers(receipt,listeDesPromos,catalog);
 	        
-	        assertThat(receipt.getTotalPrice()).isEqualTo(4);
+	        assertThat(receipt.getTotalPrice()).isEqualTo(2.0);
 	    }
 	    
 	    @Test

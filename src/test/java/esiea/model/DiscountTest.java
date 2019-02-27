@@ -27,9 +27,22 @@ class DiscountTest {
 		list_products.add(pommes);
 		list_products.add(poires);
 		Discount discount = new Discount(list_products,"test discount", 10.0);
-		Assertions.assertThat(discount.getProduct(1)).isEqualTo(poires);
-		Assertions.assertThat(discount.getProduct(1)).isNotEqualTo(pommes);
-		Assertions.assertThat(discount.getProduct(1)).isNotNull();
+		Assertions.assertThat(discount.getProduct(0)).isEqualTo(pommes);
+		Assertions.assertThat(discount.getProduct(0)).isNotEqualTo(poires);
+		Assertions.assertThat(discount.getProduct(0)).isNotNull();
+	}
+	
+	public void getProductIndexTest() {
+		int index = 1;
+		Product pommes = new Product("pommes", ProductUnit.Kilo);
+		Product poires = new Product("poires", ProductUnit.Kilo);
+		List<Product> list_products = new ArrayList<Product>();
+		list_products.add(pommes);
+		list_products.add(poires);
+		Discount discount = new Discount(list_products,"test discount", 10.0);
+		Assertions.assertThat(discount.getProduct(index)).isEqualTo(poires);
+		Assertions.assertThat(discount.getProduct(index)).isNotEqualTo(pommes);
+		Assertions.assertThat(discount.getProduct(index)).isNotNull();
 	}
 
 }

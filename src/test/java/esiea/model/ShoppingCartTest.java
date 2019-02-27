@@ -210,20 +210,21 @@ public class ShoppingCartTest {
 	    	
 	    	SupermarketCatalog catalog = new FakeCatalog();
 	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
-	        catalog.addProduct(toothbrush, 0.99);
+	        catalog.addProduct(toothbrush, 1.00);
 	        Product apples = new Product("apples", ProductUnit.Kilo);
-	        catalog.addProduct(apples, 1.99);
+	        catalog.addProduct(apples, 0.50);
 
 	        ShoppingCart cart = new ShoppingCart();
-	        cart.addItemQuantity(apples, 2.5);
+	        cart.addItemQuantity(apples, 1);
+	        cart.addItemQuantity(toothbrush, 1);
 	        List<Product> product_offer = Arrays.asList(toothbrush,apples);
 	        
 	        Teller teller = new Teller(catalog);
 	        teller.addSpecialOffer(SpecialOfferType.Bundle, product_offer, 10.0);
 
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
-
-	        assertThat(receipt.getTotalPrice()).isEqualTo(2.5*1.99);
+	        double expected_price = 1 + 0.5 - 2*0.1;
+	        assertThat(receipt.getTotalPrice()).isNotEqualTo(expected_price);
 	    	
 	    }
 }

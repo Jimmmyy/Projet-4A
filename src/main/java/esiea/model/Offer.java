@@ -21,6 +21,7 @@ public class Offer {
     public List<Product> getAllProducts() {
     	List<Product> result = new ArrayList<Product>();
     	for(int index = 0;index<products.size();index++) {
+            
     		result.add(products.get(index));
     	}
     	return result;

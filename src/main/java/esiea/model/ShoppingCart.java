@@ -1,6 +1,7 @@
 package esiea.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,6 +70,7 @@ public class ShoppingCart {
                     discount = new Discount(p, x + " for " + offer.argument, discountTotal);
                 }
                 if (offer.offerType == SpecialOfferType.Bundle) {
+                	
                 	discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
 
                     //regarder si chaque element dans la liste de bundle 

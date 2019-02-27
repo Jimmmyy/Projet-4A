@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import org.assertj.core.api.Assertions;
 
 public class OfferTest {
@@ -22,5 +21,23 @@ public class OfferTest {
 
 	}
 
+	@Test
+	public void TestMethodGetAllProducts() {
+		//TODO : methode getAllProducts() dans la classe Offer
+		
+		List<Product> product_offer = new ArrayList<Product>();
+		List<Product> product_in_cart = new ArrayList<Product>();
+		Product poire = new Product("poire", ProductUnit.Kilo);
+		Product pomme = new Product("pomme", ProductUnit.Kilo);
+		product_offer.add(poire);
+		product_offer.add(pomme);
+		product_in_cart.add(poire);
+		product_in_cart.add(pomme);
+		Offer myOffer = new Offer(SpecialOfferType.Bundle, product_offer, 10.0);
+		
+		Assertions.assertThat(product_offer.contains(poire));
+		
+		Assertions.assertThat(myOffer.getAllProducts().containsAll(product_offer));
+	}
 	
 }

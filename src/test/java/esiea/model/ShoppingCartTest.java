@@ -204,7 +204,7 @@ public class ShoppingCartTest {
 
 	    } 
 	    
-	    
+	    /*
 	    @Test
 	    public void testOffreBundle() {
 	    	
@@ -225,5 +225,5 @@ public class ShoppingCartTest {
 
 	        assertThat(receipt.getTotalPrice()).isEqualTo(2.5*1.99);
 	    	
-	    }
+	    }*/
 }

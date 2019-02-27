@@ -71,14 +71,17 @@ public class ShoppingCart {
                 }
                 /*
                 if (offer.offerType == SpecialOfferType.Bundle) {
+                	
                 	List<Product> liste_bundle = new ArrayList<Product>();
-                	for(int index = 0; index<offer.products;)
+                	for(int index = 0; index<offer.getListProductsSize();)
                 	discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
 
                     //regarder si chaque element dans la liste de bundle 
                     //est présent dans la liste des elements du charriot 
                     //for each product p in Offer on regarde si liste.contains(p)
-                }*/
+                } 
+                
+                */
                 if (discount != null)
                     receipt.addDiscount(discount);
             }

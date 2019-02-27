@@ -1,6 +1,7 @@
 package esiea.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +36,12 @@ public class ShoppingCart {
 
     void handleOffers(Receipt receipt, Map<Product, Offer> offers, SupermarketCatalog catalog) {
         for (Product p: productQuantities().keySet()) {
+        	
             double quantity = productQuantities.get(p);
             if (offers.containsKey(p)) {
                 Offer offer = offers.get(p);
+            	List<Product> product_offer = new ArrayList<Product>();
+            	product_offer.add(p);
                 double unitPrice = catalog.getUnitPrice(p);
                 int quantityAsInt = (int) quantity;
                 Discount discount = null;
@@ -50,7 +54,7 @@ public class ShoppingCart {
                     if (quantityAsInt >= 2) {
                         double total = offer.argument * quantityAsInt / x + quantityAsInt % 2 * unitPrice;
                         double discountN = unitPrice * quantity - total;
-                        discount = new Discount(p, "2 for " + offer.argument, discountN);
+                        discount = new Discount(product_offer, "2 for " + offer.argument, discountN);
                     }
 
                 } if (offer.offerType == SpecialOfferType.FiveForAmount) {
@@ -59,14 +63,14 @@ public class ShoppingCart {
                 int numberOfXs = quantityAsInt / x;
                 if (offer.offerType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2) {
                     double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
-                    discount = new Discount(p, "3 for 2", discountAmount);
+                    discount = new Discount(product_offer, "3 for 2", discountAmount);
                 }
                 if (offer.offerType == SpecialOfferType.TenPercentDiscount) {
-                    discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+                    discount = new Discount(product_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
                 }
                 if (offer.offerType == SpecialOfferType.FiveForAmount && quantityAsInt >= 5) {
                     double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-                    discount = new Discount(p, x + " for " + offer.argument, discountTotal);
+                    discount = new Discount(product_offer, x + " for " + offer.argument, discountTotal);
                 }
                 if (offer.offerType == SpecialOfferType.Bundle) {
                 	//offer.getAllProducts
@@ -78,7 +82,7 @@ public class ShoppingCart {
                 			}
                 		}
                 	if (allBundleProductsAreInCart) {
-            			discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+            			discount = new Discount(product_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
             		}
 
                     //regarder si chaque element dans la liste de bundle 

@@ -23,8 +23,6 @@ public class OfferTest {
 
 	@Test
 	public void testMethodGetAllProducts() {
-		//TODO : methode getAllProducts() dans la classe Offer
-		
 		List<Product> product_offer = new ArrayList<Product>();
 		List<Product> product_in_cart = new ArrayList<Product>();
 		Product poire = new Product("poire", ProductUnit.Kilo);

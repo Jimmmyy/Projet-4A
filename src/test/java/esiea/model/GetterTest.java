@@ -3,6 +3,7 @@ package esiea.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -70,8 +71,8 @@ public class GetterTest {
 	    
 	    @Test
 	    public void getDescriptiontest(){
-	        Product apples = new Product("apples", ProductUnit.Kilo);
-	        Discount testDiscount = new Discount(apples, "Apples Discount", 1.99);
+	    	List<Product> product_discount = Arrays.asList(new Product("apples", ProductUnit.Kilo));
+	        Discount testDiscount = new Discount(product_discount, "Apples Discount", 1.99);
 
 	        Assertions.assertThat(testDiscount.getDescription()).isEqualTo("Apples Discount");
 	    }
@@ -79,8 +80,10 @@ public class GetterTest {
 	    
 	    @Test
 	    public void getProducttest(){
+	    	
 	        Product apples = new Product("apples",ProductUnit.Kilo);
-	        Discount testDiscount = new Discount(apples, "Apples Discount", 1.99);
+	        List<Product> product_discount = Arrays.asList(apples);
+	        Discount testDiscount = new Discount(product_discount, "Apples Discount", 1.99);
 
 	        Assertions.assertThat(testDiscount.getProduct()).isEqualTo(apples);
 	    }

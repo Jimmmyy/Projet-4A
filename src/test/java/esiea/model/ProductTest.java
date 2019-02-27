@@ -1,5 +1,8 @@
 package esiea.model;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +13,8 @@ public class ProductTest {
     public void testEquals () {
 
         Product apples = new Product("apples", ProductUnit.Kilo);
-
-        Discount discount = new Discount(apples, "Apples Discount", 0.199);
+        List<Product> product_discount = Arrays.asList(apples);
+        Discount discount = new Discount(product_discount, "Apples Discount", 0.199);
 
         Product banane = new Product("banane", ProductUnit.Kilo);
         Product toothbrush = new Product("toothbrush", ProductUnit.Each);

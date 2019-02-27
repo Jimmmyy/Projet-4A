@@ -38,6 +38,16 @@ public class OfferTest {
 		Assertions.assertThat(myOffer.getAllProducts().containsAll(product_offer));
 	}
 	
-	
+	@Test
+	public void testGetListProductsSize() {
+		List<Product> product_offer = new ArrayList<Product>();
+		Product poire = new Product("poire", ProductUnit.Kilo);
+		Product pomme = new Product("pomme", ProductUnit.Kilo);
+		product_offer.add(poire);
+		product_offer.add(pomme);
+		Offer myOffer = new Offer(SpecialOfferType.Bundle, product_offer, 10);
+		
+		Assertions.assertThat(myOffer.getListProductsSize()).isEqualTo(2);
+	}
 	
 }

@@ -10,7 +10,7 @@ public class ShoppingCart {
 
     private final List<ProductQuantity> items = new ArrayList<>();
     Map<Product, Double> productQuantities = new HashMap<>();
-
+    
 
     List<ProductQuantity> getItems() {
         return new ArrayList<>(items);
@@ -40,8 +40,12 @@ public class ShoppingCart {
             double quantity = productQuantities.get(p);
             if (offers.containsKey(p)) {
                 Offer offer = offers.get(p);
-            	List<Product> product_offer = new ArrayList<Product>();
-            	product_offer.add(p);
+            	List<Product> current_product_with_offer = new ArrayList<Product>();
+            	List<Product> product_with_bundle_offer = new ArrayList<Product>();
+            	List<Product> liste_bundle = new ArrayList<Product>();
+            	boolean allBundleProductsAreInCart = false;
+            	double bundle_discount_total = 0.0;
+            	current_product_with_offer.add(p);
                 double unitPrice = catalog.getUnitPrice(p);
                 int quantityAsInt = (int) quantity;
                 Discount discount = null;
@@ -54,7 +58,7 @@ public class ShoppingCart {
                     if (quantityAsInt >= 2) {
                         double total = offer.argument * quantityAsInt / x + quantityAsInt % 2 * unitPrice;
                         double discountN = unitPrice * quantity - total;
-                        discount = new Discount(product_offer, "2 for " + offer.argument, discountN);
+                        discount = new Discount(current_product_with_offer, "2 for " + offer.argument, discountN);
                     }
 
                 } if (offer.offerType == SpecialOfferType.FiveForAmount) {
@@ -63,27 +67,39 @@ public class ShoppingCart {
                 int numberOfXs = quantityAsInt / x;
                 if (offer.offerType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2) {
                     double discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
-                    discount = new Discount(product_offer, "3 for 2", discountAmount);
+                    discount = new Discount(current_product_with_offer, "3 for 2", discountAmount);
                 }
                 if (offer.offerType == SpecialOfferType.TenPercentDiscount) {
-                    discount = new Discount(product_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+                    discount = new Discount(current_product_with_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
                 }
                 if (offer.offerType == SpecialOfferType.FiveForAmount && quantityAsInt >= 5) {
                     double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
-                    discount = new Discount(product_offer, x + " for " + offer.argument, discountTotal);
+                    discount = new Discount(current_product_with_offer, x + " for " + offer.argument, discountTotal);
                 }
                 if (offer.offerType == SpecialOfferType.Bundle) {
+                	
+                	product_with_bundle_offer.add(p);
+                	if (!liste_bundle.isEmpty()) {
+                		liste_bundle = offer.getAllProducts();
+                	}
+                	if(product_with_bundle_offer.containsAll(liste_bundle) && allBundleProductsAreInCart) {
+                		//discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
+                		
+                	}
+                	discount = new Discount(current_product_with_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+            		
+                	//discount = new Discount(product_offer, offer.argument + "% off bundle", quantity * unitPrice * offer.argument / 100.0);
                 	//offer.getAllProducts
-                	boolean allBundleProductsAreInCart = false;
-                	List<Product> liste_bundle = offer.getAllProducts();
-                		if (liste_bundle.contains(p)) {
-                			for(int index = 0; index<offer.getListProductsSize(); index++) {
-                				allBundleProductsAreInCart = true;
-                			}
-                		}
-                	if (allBundleProductsAreInCart) {
-            			discount = new Discount(product_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
-            		}
+                	//
+                	
+                		//if (liste_bundle.contains(p)) {
+                			//for(int index = 0; index<offer.getListProductsSize(); index++) {
+                				//allBundleProductsAreInCart = true;
+                			//}
+                		//}
+                	//if (allBundleProductsAreInCart) {
+            			//discount = new Discount(product_offer, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+            		//}
 
                     //regarder si chaque element dans la liste de bundle 
                     //est présent dans la liste des elements du charriot 

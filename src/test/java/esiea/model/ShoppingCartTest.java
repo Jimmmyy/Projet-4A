@@ -204,6 +204,7 @@ public class ShoppingCartTest {
 
 	    } 
 	    
+	    
 	    @Test
 	    public void testOffreBundle() {
 	    	

@@ -12,12 +12,12 @@ public class OfferTest {
 	@Test
 	public void TestMethodGetProduct() {
 		List<Product> product_offer = Arrays.asList(new Product("poire", ProductUnit.Kilo));
-		Offer Myoffer = new Offer(SpecialOfferType.TenPercentDiscount, product_offer, 3.99);
-		Assertions.assertThat(Myoffer.getProduct().getName()).isEqualTo("poire");
+		Offer myOffer = new Offer(SpecialOfferType.TenPercentDiscount, product_offer, 3.99);
+		Assertions.assertThat(myOffer.getProduct().getName()).isEqualTo("poire");
 
-		Assertions.assertThat(Myoffer.getProduct().getName()).isNotEmpty();
+		Assertions.assertThat(myOffer.getProduct().getName()).isNotEmpty();
 
-		Assertions.assertThat(Myoffer.getProduct().getName()).isNotEqualTo("toothbrush");
+		Assertions.assertThat(myOffer.getProduct().getName()).isNotEqualTo("toothbrush");
 
 	}
 
@@ -35,9 +35,9 @@ public class OfferTest {
 		product_in_cart.add(pomme);
 		Offer myOffer = new Offer(SpecialOfferType.Bundle, product_offer, 10.0);
 		
-		Assertions.assertThat(product_offer.contains(poire));
-		
 		Assertions.assertThat(myOffer.getAllProducts().containsAll(product_offer));
 	}
+	
+	
 	
 }

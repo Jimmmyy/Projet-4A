@@ -18,6 +18,10 @@ public class Offer {
     	return products.get(0);
     }
     
+    public int getListProductsSize() {
+    	return products.size();
+    }
+    
     public List<Product> getAllProducts() {
     	List<Product> result = new ArrayList<Product>();
     	for(int index = 0;index<products.size();index++) {

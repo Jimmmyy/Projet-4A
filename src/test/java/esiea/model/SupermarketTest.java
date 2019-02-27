@@ -112,5 +112,4 @@ public class SupermarketTest {
            Assertions.assertThat(receiptItem.hashCode()).isEqualTo(Objects.hash(product, 1.99, 3.98, 2.0));
        }
     
-    
 }

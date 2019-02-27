@@ -68,6 +68,13 @@ public class ShoppingCart {
                     double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
                     discount = new Discount(p, x + " for " + offer.argument, discountTotal);
                 }
+                if (offer.offerType == SpecialOfferType.Bundle) {
+                	discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+
+                    //regarder si chaque element dans la liste de bundle 
+                    //est présent dans la liste des elements du charriot 
+                    //for each product p in Offer on regarde si liste.contains(p)
+                }
                 if (discount != null)
                     receipt.addDiscount(discount);
             }

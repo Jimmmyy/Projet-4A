@@ -1,6 +1,9 @@
 package esiea.model;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,10 +25,9 @@ public class ReceiptPrinterTest {
 
 		        cart.addItemQuantity(toothbrush, 4);
 		        cart.addItemQuantity(apple, 1.00);
-
-
+		        List<Product> product_offer = Arrays.asList(toothbrush);
 		        Teller teller = new Teller(catalog);
-		        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, toothbrush, 0.99);
+		        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, product_offer, 0.99);
 		        Receipt receipt = teller.checksOutArticlesFrom(cart);
 
 		        ReceiptPrinter receiptPrinter = new ReceiptPrinter();

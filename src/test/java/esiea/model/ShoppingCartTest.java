@@ -5,18 +5,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import java.util.*;
-
 
 public class ShoppingCartTest {
 	
 	private ShoppingCart cart = new ShoppingCart();
 	private Product toothbrush = new Product("toothbrush", ProductUnit.Each);
 	private Product poire = new Product ("poire", ProductUnit.Kilo);
-
+	
 	 @Test
 	    public void testPrixPommeAvecReducBrosseADents() {
 	        SupermarketCatalog catalog = new FakeCatalog();
@@ -27,9 +25,10 @@ public class ShoppingCartTest {
 
 	        ShoppingCart cart = new ShoppingCart();
 	        cart.addItemQuantity(apples, 2.5);
-
+	        List<Product> product_offer = Arrays.asList(toothbrush);
+	        
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+	        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product_offer, 10.0);
 
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 
@@ -47,9 +46,10 @@ public class ShoppingCartTest {
 
 	        ShoppingCart cart = new ShoppingCart();
 	        cart.addItemQuantity(apples, 3);
-
+	        List<Product> product_offer = Arrays.asList(apples);
+	        
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, apples, 10.0);
+	        teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, product_offer, 10.0);
 
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
 	        
@@ -57,7 +57,7 @@ public class ShoppingCartTest {
 	        
 	        assertThat(receipt.getTotalPrice()).isEqualTo(expected);
 	        
-	     }
+	     } 
 	    
 	  /* @Test
 	    public void testOffreThreeForTwo() {
@@ -99,9 +99,9 @@ public class ShoppingCartTest {
 		   SupermarketCatalog catalog = new FakeCatalog();
            Teller teller = new Teller(catalog);
            Product tampax = new Product("tampax", ProductUnit.Each);
-		   
+           List<Product> product_offer = Arrays.asList(tampax);
            catalog.addProduct(tampax, 3.49);
-           teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, tampax, 0);
+           teller.addSpecialOffer(SpecialOfferType.ThreeForTwo, product_offer, 0);
            
  
            ShoppingCart cart = new ShoppingCart();
@@ -128,7 +128,8 @@ public class ShoppingCartTest {
         
         Product rasoir = new Product("rasoir", ProductUnit.Each);
         catalog.addProduct(rasoir, 2.5);
-        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, rasoir, 4);
+        List<Product> product_offer = Arrays.asList(rasoir);
+        teller.addSpecialOffer(SpecialOfferType.TwoForAmount, product_offer, 4);
 
         
         ShoppingCart cart = new ShoppingCart();
@@ -151,10 +152,10 @@ public class ShoppingCartTest {
 	    	SupermarketCatalog catalog = new FakeCatalog();
 	        Product kiwi = new Product("kiwi", ProductUnit.Each);
 	        catalog.addProduct(kiwi, 2.00);
+	        List<Product> product_offer = Arrays.asList(kiwi);
 	        
-	     
 	        Teller teller = new Teller(catalog);
-	        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, kiwi, 7.50);
+	        teller.addSpecialOffer(SpecialOfferType.FiveForAmount, product_offer, 7.50);
 	        
 	        ShoppingCart cart = new ShoppingCart();
 	        cart.addItemQuantity(kiwi, 3);
@@ -201,5 +202,30 @@ public class ShoppingCartTest {
 	    	double quantite=productQuantities.get(poire);
 	    	Assertions.assertEquals(4,quantite);
 
+	    } 
+	    
+	    @Test
+	    public void testOffreBundle() {
+	    	
+	    	SupermarketCatalog catalog = new FakeCatalog();
+	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+	        catalog.addProduct(toothbrush, 0.99);
+	        Product apples = new Product("apples", ProductUnit.Kilo);
+	        catalog.addProduct(apples, 1.99);
+
+	        ShoppingCart cart = new ShoppingCart();
+	        cart.addItemQuantity(apples, 2.5);
+	        List<Product> product_offer = Arrays.asList(toothbrush,apples);
+	        
+	        Teller teller = new Teller(catalog);
+	        teller.addSpecialOffer(SpecialOfferType.Bundle, product_offer, 10.0);
+
+	        Receipt receipt = teller.checksOutArticlesFrom(cart);
+
+	        //test : combien coute 2.5 kg de pommes à 1.99€ compte tenu du fait qu'une
+	        // réduction est en court sur les brosses à dents.
+	        
+	        assertThat(receipt.getTotalPrice()).isEqualTo(2.5*1.99);
+	    	
 	    }
 }

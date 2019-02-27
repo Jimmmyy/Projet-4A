@@ -1,7 +1,6 @@
 package esiea.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,19 +68,23 @@ public class ShoppingCart {
                     double discountTotal = unitPrice * quantity - (offer.argument * numberOfXs + quantityAsInt % 5 * unitPrice);
                     discount = new Discount(p, x + " for " + offer.argument, discountTotal);
                 }
-                /*
                 if (offer.offerType == SpecialOfferType.Bundle) {
-                	
-                	List<Product> liste_bundle = new ArrayList<Product>();
-                	for(int index = 0; index<offer.getListProductsSize();)
-                	discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+                	//offer.getAllProducts
+                	boolean allBundleProductsAreInCart = false;
+                	List<Product> liste_bundle = offer.getAllProducts();
+                		if (liste_bundle.contains(p)) {
+                			for(int index = 0; index<offer.getListProductsSize(); index++) {
+                				allBundleProductsAreInCart = true;
+                			}
+                		}
+                	if (allBundleProductsAreInCart) {
+            			discount = new Discount(p, offer.argument + "% off", quantity * unitPrice * offer.argument / 100.0);
+            		}
 
                     //regarder si chaque element dans la liste de bundle 
                     //est présent dans la liste des elements du charriot 
                     //for each product p in Offer on regarde si liste.contains(p)
                 } 
-                
-                */
                 if (discount != null)
                     receipt.addDiscount(discount);
             }

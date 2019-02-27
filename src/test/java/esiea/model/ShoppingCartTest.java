@@ -221,10 +221,32 @@ public class ShoppingCartTest {
 	        
 	        Teller teller = new Teller(catalog);
 	        teller.addSpecialOffer(SpecialOfferType.Bundle, product_offer, 10.0);
-
+	        System.out.println();
 	        Receipt receipt = teller.checksOutArticlesFrom(cart);
-	        double expected_price = 1 + 0.5 - 2*0.1;
+	        double expected_price = 1 + 0.5 - 1.5*0.1;
 	        assertThat(receipt.getTotalPrice()).isNotEqualTo(expected_price);
+	    	
+	    }
+	    
+	    @Test
+	    public void testOffreBundleSimple() {
+	    	
+	    	SupermarketCatalog catalog = new FakeCatalog();
+	        Product toothbrush = new Product("toothbrush", ProductUnit.Each);
+	        catalog.addProduct(toothbrush, 1.00);
+	        Product apples = new Product("apples", ProductUnit.Kilo);
+	        catalog.addProduct(apples, 0.50);
+
+	        ShoppingCart cart = new ShoppingCart();
+	        cart.addItemQuantity(apples, 1);
+	        List<Product> product_offer = Arrays.asList(apples);
+	        
+	        Teller teller = new Teller(catalog);
+	        teller.addSpecialOffer(SpecialOfferType.Bundle, product_offer, 10.0);
+	        System.out.println();
+	        Receipt receipt = teller.checksOutArticlesFrom(cart);
+	        double expected_price = 0.5 - 0.5*0.1;
+	        assertThat(receipt.getTotalPrice()).isEqualTo(expected_price);
 	    	
 	    }
 }
